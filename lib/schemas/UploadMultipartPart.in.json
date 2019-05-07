@@ -1,0 +1,59 @@
+{
+    "type": "object",
+    "properties": {
+        "accountId": {
+            "required": true,
+            "type": "string"
+        },
+        "vaultName": {
+            "required": true,
+            "type": "string"
+        },
+        "uploadId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Provides options to upload a part of an archive in a multipart upload operation.",
+            "example": {
+                "accountId": "-",
+                "body": "part1",
+                "checksum": "c06f7cd4baacb087002a99a5f48bf953",
+                "range": "bytes 0-1048575/*",
+                "uploadId": "19gaRezEXAMPLES6Ry5YYdqthHOC_kGRCT03L9yetr220UmPtBYKk-OssZtLqyFu7sY1_lR7vgFuJV6NtcV5zpsJ",
+                "vaultName": "examplevault"
+            },
+            "properties": {
+                "body": {
+                    "description": "The data to upload.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

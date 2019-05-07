@@ -1,0 +1,65 @@
+{
+    "type": "object",
+    "properties": {
+        "operation": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "remove"
+            ]
+        },
+        "accountId": {
+            "required": true,
+            "type": "string"
+        },
+        "vaultName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The input value for <code>RemoveTagsFromVaultInput</code>.",
+            "example": {
+                "TagKeys": [
+                    "examplekey1",
+                    "examplekey2"
+                ],
+                "accountId": "-",
+                "vaultName": "examplevault"
+            },
+            "properties": {
+                "TagKeys": {
+                    "description": "A list of tag keys. Each corresponding tag is removed from the vault.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

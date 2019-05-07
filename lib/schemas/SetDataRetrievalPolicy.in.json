@@ -1,0 +1,82 @@
+{
+    "type": "object",
+    "properties": {
+        "accountId": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "SetDataRetrievalPolicy input.",
+            "example": {
+                "Policy": {
+                    "Rules": [
+                        {
+                            "BytesPerHour": 10737418240,
+                            "Strategy": "BytesPerHour"
+                        }
+                    ]
+                },
+                "accountId": "-"
+            },
+            "properties": {
+                "Policy": {
+                    "description": "The data retrieval policy in JSON format.",
+                    "properties": {
+                        "Rules": {
+                            "description": "The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.",
+                            "items": {
+                                "description": "Data retrieval policy rule.",
+                                "properties": {
+                                    "BytesPerHour": {
+                                        "description": "<p>The maximum number of bytes that can be retrieved in an hour.</p> <p>This field is required only if the value of the Strategy field is <code>BytesPerHour</code>. Your PUT operation will be rejected if the Strategy field is not set to <code>BytesPerHour</code> and you set this field.</p>",
+                                        "type": "integer"
+                                    },
+                                    "Strategy": {
+                                        "description": "<p>The type of data retrieval policy to set.</p> <p>Valid values: BytesPerHour|FreeTier|None</p>",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

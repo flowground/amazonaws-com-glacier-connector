@@ -1,0 +1,356 @@
+{
+    "type": "object",
+    "properties": {
+        "accountId": {
+            "required": true,
+            "type": "string"
+        },
+        "vaultName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Provides options for initiating an Amazon Glacier job.",
+            "example": {
+                "accountId": "-",
+                "jobParameters": {
+                    "Description": "My inventory job",
+                    "Format": "CSV",
+                    "SNSTopic": "arn:aws:sns:us-west-2:111111111111:Glacier-InventoryRetrieval-topic-Example",
+                    "Type": "inventory-retrieval"
+                },
+                "vaultName": "examplevault"
+            },
+            "properties": {
+                "jobParameters": {
+                    "description": "Provides options for specifying job information.",
+                    "properties": {
+                        "ArchiveId": {
+                            "description": "The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. ",
+                            "type": "string"
+                        },
+                        "Description": {
+                            "description": "The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.",
+                            "type": "string"
+                        },
+                        "Format": {
+                            "description": "When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid values are \"CSV\" and \"JSON\".",
+                            "type": "string"
+                        },
+                        "InventoryRetrievalParameters": {
+                            "description": "Input parameters used for range inventory retrieval.",
+                            "properties": {
+                                "EndDate": {
+                                    "description": "The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.",
+                                    "type": "string"
+                                },
+                                "Limit": {
+                                    "description": "Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.",
+                                    "type": "string"
+                                },
+                                "Marker": {
+                                    "description": "An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.",
+                                    "type": "string"
+                                },
+                                "StartDate": {
+                                    "description": "The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "OutputLocation": {
+                            "description": "Contains information about the location where the select job results are stored.",
+                            "properties": {
+                                "S3": {
+                                    "description": "Describes an S3 location that will receive the results of the job request.",
+                                    "properties": {
+                                        "AccessControlList": {
+                                            "description": "A list of grants that control access to the staged results.",
+                                            "items": {
+                                                "description": "Contains information about a grant.",
+                                                "properties": {
+                                                    "Grantee": {
+                                                        "description": "The grantee.",
+                                                        "properties": {
+                                                            "DisplayName": {
+                                                                "description": "Screen name of the grantee.",
+                                                                "type": "string"
+                                                            },
+                                                            "EmailAddress": {
+                                                                "description": "Email address of the grantee.",
+                                                                "type": "string"
+                                                            },
+                                                            "ID": {
+                                                                "description": "The canonical user ID of the grantee.",
+                                                                "type": "string"
+                                                            },
+                                                            "Type": {
+                                                                "description": "Type of grantee",
+                                                                "enum": [
+                                                                    "AmazonCustomerByEmail",
+                                                                    "CanonicalUser",
+                                                                    "Group"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "URI": {
+                                                                "description": "URI of the grantee group.",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "Type"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "Permission": {
+                                                        "description": "Specifies the permission given to the grantee. ",
+                                                        "enum": [
+                                                            "FULL_CONTROL",
+                                                            "WRITE",
+                                                            "WRITE_ACP",
+                                                            "READ",
+                                                            "READ_ACP"
+                                                        ],
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "BucketName": {
+                                            "description": "The name of the Amazon S3 bucket where the job results are stored.",
+                                            "type": "string"
+                                        },
+                                        "CannedACL": {
+                                            "description": "The canned access control list (ACL) to apply to the job results.",
+                                            "enum": [
+                                                "private",
+                                                "public-read",
+                                                "public-read-write",
+                                                "aws-exec-read",
+                                                "authenticated-read",
+                                                "bucket-owner-read",
+                                                "bucket-owner-full-control"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "Encryption": {
+                                            "description": "Contains information about the encryption used to store the job results in Amazon S3.",
+                                            "properties": {
+                                                "EncryptionType": {
+                                                    "description": "The server-side encryption algorithm used when storing job results in Amazon S3, for example <code>AES256</code> or <code>aws:kms</code>.",
+                                                    "enum": [
+                                                        "aws:kms",
+                                                        "AES256"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "KMSContext": {
+                                                    "description": "Optional. If the encryption type is <code>aws:kms</code>, you can use this value to specify the encryption context for the job results.",
+                                                    "type": "string"
+                                                },
+                                                "KMSKeyId": {
+                                                    "description": "The AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL) or Signature Version 4. ",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "Prefix": {
+                                            "description": "The prefix that is prepended to the results for this request.",
+                                            "type": "string"
+                                        },
+                                        "StorageClass": {
+                                            "description": "The storage class used to store the job results.",
+                                            "enum": [
+                                                "STANDARD",
+                                                "REDUCED_REDUNDANCY",
+                                                "STANDARD_IA"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "Tagging": {
+                                            "description": "The tag-set that is applied to the job results.",
+                                            "items": {
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "UserMetadata": {
+                                            "description": "A map of metadata to store with the job results in Amazon S3.",
+                                            "items": {
+                                                "properties": {
+                                                    "key": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "RetrievalByteRange": {
+                            "description": "<p>The byte range to retrieve for an archive retrieval. in the form \"<i>StartByteValue</i>-<i>EndByteValue</i>\" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>",
+                            "type": "string"
+                        },
+                        "SNSTopic": {
+                            "description": "The Amazon SNS topic ARN to which Amazon Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.",
+                            "type": "string"
+                        },
+                        "SelectParameters": {
+                            "description": "Contains the parameters that define a job.",
+                            "properties": {
+                                "Expression": {
+                                    "description": "The expression that is used to select the object.",
+                                    "type": "string"
+                                },
+                                "ExpressionType": {
+                                    "description": "The type of the provided expression, for example <code>SQL</code>.",
+                                    "enum": [
+                                        "SQL"
+                                    ],
+                                    "type": "string"
+                                },
+                                "InputSerialization": {
+                                    "description": "Describes the serialization format of the object.",
+                                    "properties": {
+                                        "csv": {
+                                            "description": "Describes the serialization of a CSV-encoded object.",
+                                            "properties": {
+                                                "Comments": {
+                                                    "description": "A single character used to indicate that a row should be ignored when the character is present at the start of that row.",
+                                                    "type": "string"
+                                                },
+                                                "FieldDelimiter": {
+                                                    "description": "A value used to separate individual fields from each other within a record.",
+                                                    "type": "string"
+                                                },
+                                                "FileHeaderInfo": {
+                                                    "description": "Describes the first line of input. Valid values are <code>None</code>, <code>Ignore</code>, and <code>Use</code>.",
+                                                    "enum": [
+                                                        "USE",
+                                                        "IGNORE",
+                                                        "NONE"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "QuoteCharacter": {
+                                                    "description": "A value used as an escape character where the field delimiter is part of the value.",
+                                                    "type": "string"
+                                                },
+                                                "QuoteEscapeCharacter": {
+                                                    "description": "A single character used for escaping the quotation-mark character inside an already escaped value.",
+                                                    "type": "string"
+                                                },
+                                                "RecordDelimiter": {
+                                                    "description": "A value used to separate individual records from each other.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "OutputSerialization": {
+                                    "description": "Describes how the results of the select job are serialized.",
+                                    "properties": {
+                                        "csv": {
+                                            "description": "Describes the serialization of CSV-encoded query results.",
+                                            "properties": {
+                                                "FieldDelimiter": {
+                                                    "description": "A value used to separate individual fields from each other within a record.",
+                                                    "type": "string"
+                                                },
+                                                "QuoteCharacter": {
+                                                    "description": "A value used as an escape character where the field delimiter is part of the value.",
+                                                    "type": "string"
+                                                },
+                                                "QuoteEscapeCharacter": {
+                                                    "description": "A single character used for escaping the quotation-mark character inside an already escaped value.",
+                                                    "type": "string"
+                                                },
+                                                "QuoteFields": {
+                                                    "description": "A value that indicates whether all output fields should be contained within quotation marks.",
+                                                    "enum": [
+                                                        "ALWAYS",
+                                                        "ASNEEDED"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "RecordDelimiter": {
+                                                    "description": "A value used to separate individual records from each other.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "Tier": {
+                            "description": "The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.",
+                            "type": "string"
+                        },
+                        "Type": {
+                            "description": "The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are \"select\", \"archive-retrieval\" and \"inventory-retrieval\".",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

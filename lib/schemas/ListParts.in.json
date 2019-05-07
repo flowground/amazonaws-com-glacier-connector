@@ -1,0 +1,51 @@
+{
+    "type": "object",
+    "properties": {
+        "limit": {
+            "required": false,
+            "type": "string"
+        },
+        "marker": {
+            "required": false,
+            "type": "string"
+        },
+        "accountId": {
+            "required": true,
+            "type": "string"
+        },
+        "vaultName": {
+            "required": true,
+            "type": "string"
+        },
+        "uploadId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Provides options for retrieving a list of parts of an archive that have been uploaded in a specific multipart upload.",
+            "example": {
+                "accountId": "-",
+                "uploadId": "OW2fM5iVylEpFEMM9_HpKowRapC3vn5sSL39_396UW9zLFUWVrnRHaPjUJddQ5OxSHVXjYtrN47NBZ-khxOjyEXAMPLE",
+                "vaultName": "examplevault"
+            },
+            "properties": {},
+            "type": "object"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

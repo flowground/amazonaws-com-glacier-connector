@@ -1,0 +1,73 @@
+{
+    "type": "object",
+    "properties": {
+        "operation": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "add"
+            ]
+        },
+        "accountId": {
+            "required": true,
+            "type": "string"
+        },
+        "vaultName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The input values for <code>AddTagsToVault</code>.",
+            "example": {
+                "Tags": {
+                    "examplekey1": "examplevalue1",
+                    "examplekey2": "examplevalue2"
+                },
+                "accountId": "-",
+                "vaultName": "my-vault"
+            },
+            "properties": {
+                "Tags": {
+                    "description": "The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.",
+                    "items": {
+                        "properties": {
+                            "key": {
+                                "type": "string"
+                            },
+                            "value": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

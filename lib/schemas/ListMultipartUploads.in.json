@@ -1,0 +1,50 @@
+{
+    "type": "object",
+    "properties": {
+        "limit": {
+            "required": false,
+            "type": "string"
+        },
+        "marker": {
+            "required": false,
+            "type": "string"
+        },
+        "accountId": {
+            "required": true,
+            "type": "string"
+        },
+        "vaultName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Provides options for retrieving list of in-progress multipart uploads for an Amazon Glacier vault.",
+            "example": {
+                "accountId": "-",
+                "vaultName": "examplevault"
+            },
+            "properties": {},
+            "type": "object"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,75 @@
+{
+    "type": "object",
+    "properties": {
+        "accountId": {
+            "required": true,
+            "type": "string"
+        },
+        "vaultName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Provides options to configure notifications that will be sent when specific events happen to a vault.",
+            "example": {
+                "accountId": "-",
+                "vaultName": "examplevault",
+                "vaultNotificationConfig": {
+                    "Events": [
+                        "ArchiveRetrievalCompleted",
+                        "InventoryRetrievalCompleted"
+                    ],
+                    "SNSTopic": "arn:aws:sns:us-west-2:012345678901:mytopic"
+                }
+            },
+            "properties": {
+                "vaultNotificationConfig": {
+                    "description": "Provides options for specifying notification configuration.",
+                    "properties": {
+                        "Events": {
+                            "description": "A list of one or more events for which Amazon Glacier will send a notification to the specified Amazon SNS topic.",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "SNSTopic": {
+                            "description": "The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
